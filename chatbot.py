@@ -65,14 +65,14 @@ def clear_chat_history():
 st.sidebar.button('Limpiar chat', on_click=clear_chat_history)
 
 def generate_response(model):
-    history = [st.session_state.messages[0]] + st.session_state.messages[-memory:] if len(st.session_state.messages) > 5 else st.session_state.messages
-    response = openai.ChatCompletion.create(  # Cambiado aquí
-                        model=model,
-                        messages=history,
-                        temperature=temp,
-                        max_tokens=2000
-                    )
-    msg = response.choices[0].message['content']  # Asegúrate de extraer el mensaje de la respuesta correctamente
+    history = [st.session_state.messages[0]] + st.session_state.messages[-memory:] if len(st.session_state.messages) > memory else st.session_state.messages
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=history,
+        temperature=temp,
+        max_tokens=2000
+    )
+    msg = response.choices[0].message['content']
     return msg
 
 
