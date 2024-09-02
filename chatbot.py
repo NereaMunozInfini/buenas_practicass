@@ -27,7 +27,7 @@ with st.sidebar:
     #api_key = st.text_input('API Key:', placeholder='Aquí tu API Key de OpenAI', type='password')
     #id_model = st.text_input('Id Modelo:', placeholder='Id de tu modelo de fine-tuning', type='password')
 
-    api_key="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"
+    api_key = st.secrets["APIKEY"]
     id_model = "ft:gpt-4o-2024-08-06:personal:bestpractices8:A1DsNAL7"
 
     # with placeholder.container():
