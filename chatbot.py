@@ -81,43 +81,16 @@ def generate_response(model):
 #     with st.chat_message("user"):
 #         st.write(prompt)
 
-
-# PRUEBA
-# if prompt := st.chat_input(placeholder='Tú mensaje...'):
-#     st.session_state.messages.append({"role": "user", "content": prompt})
-#     with st.chat_message("user"):
-#         st.write(prompt)
-
-
-# if st.session_state.messages[-1]["role"] == "user":
-#     with st.chat_message("assistant"):
-#         with st.spinner("Pensando..."):
-#             response = generate_response(id_model) 
-#             st.write(response) 
-#     message = {"role": "assistant", "content": response}
-#     st.session_state.messages.append(message)
-
-
-# Placeholder para el mensaje del asistente (spinner de pensando)
-response_placeholder = st.empty()
-
-# Caja de entrada del chat para que el usuario escriba
 if prompt := st.chat_input(placeholder='Tú mensaje...'):
-    st.session_state.messages.append({"role": "user", "content": prompt})  # Añadir el mensaje del usuario al historial
-    
-    # Mostrar el mensaje del usuario en la interfaz
+    st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.write(prompt)
 
-    # Mostrar un indicador temporal mientras el modelo genera la respuesta
-    with response_placeholder.container():
-        with st.chat_message("assistant"):
-            with st.spinner("Pensando..."):
-                response = generate_response(id_model)  # Generar la respuesta
-                st.write(response)  # Mostrar la respuesta
-    
-    # Añadir la respuesta del asistente al historial
-    st.session_state.messages.append({"role": "assistant", "content": response})
 
-    # Limpiar el placeholder de "Pensando"
-    response_placeholder.empty()
+if st.session_state.messages[-1]["role"] == "user":
+    with st.chat_message("assistant"):
+        with st.spinner("Pensando..."):
+            response = generate_response(id_model) 
+            st.write(response) 
+    message = {"role": "assistant", "content": response}
+    st.session_state.messages.append(message)
