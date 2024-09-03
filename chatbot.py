@@ -86,10 +86,24 @@ if prompt := st.chat_input(placeholder='Tú mensaje...'):
     with st.chat_message("user"):
         st.write(prompt)
 
+# PRUEBA
+# if st.session_state.messages[-1]["role"] == "user":
+#     with st.chat_message("assistant"):
+#         with st.spinner("Pensando..."):
+#             response = generate_response(id_model) 
+#             st.write(response) 
+#     message = {"role": "assistant", "content": response}
+#     st.session_state.messages.append(message)
+
 if st.session_state.messages[-1]["role"] == "user":
-    with st.chat_message("assistant"):
+    placeholder = st.empty()  # Crear un placeholder para "Pensando"
+    
+    with placeholder.container():  # Contenedor temporal para mostrar el spinner
         with st.spinner("Pensando..."):
-            response = generate_response(id_model) 
-            st.write(response) 
+            response = generate_response(id_model)  # Generar la respuesta
+            st.write(response)  # Mostrar la respuesta
+
+    # Luego actualizamos el estado del chat
     message = {"role": "assistant", "content": response}
     st.session_state.messages.append(message)
+    placeholder.empty()  # Limpiar el placeholder
