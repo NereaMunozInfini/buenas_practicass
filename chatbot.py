@@ -76,16 +76,15 @@ def generate_response(model):
     return msg
 
 
-if prompt := st.chat_input(disabled=not (api_key and id_model), placeholder='Tú mensaje...'):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.write(prompt)
-
-# PRUEBA, ES EL BUENO
-# if prompt := st.chat_input(placeholder='Tú mensaje...'):
+# if prompt := st.chat_input(disabled=not (api_key and id_model), placeholder='Tú mensaje...'):
 #     st.session_state.messages.append({"role": "user", "content": prompt})
 #     with st.chat_message("user"):
 #         st.write(prompt)
+
+if prompt := st.chat_input(placeholder='Tú mensaje...'):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.write(prompt)
 
 
 if st.session_state.messages[-1]["role"] == "user":
